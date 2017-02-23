@@ -1,0 +1,13 @@
+language: python
+python:
+  - 2.7_with_system_site_packages
+  - '3.5.1'
+  - pypy
+cache:
+  directories:
+    - $HOME/.cache/pip
+sudo: false
+install:
+  - pip install -r requirements.txt
+script:
+  pyvows vows
