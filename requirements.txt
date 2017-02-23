@@ -1,0 +1,4 @@
+thumbor==6.2.1
+pyvows
+tornado_pyvows
+prometheus_client
