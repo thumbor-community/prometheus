@@ -58,6 +58,7 @@ class MetricsVows(TornadoHTTPContext):
 
             self.http_client.fetch('http://localhost:8000', self.stop)
             response = self.wait()
+            expect(response.body).Not.to_be_null()
             expect(response.body).to_include('thumbor_test_counter 6')
             expect(response.body).to_include('thumbor_test_timer_count 2')
             expect(response.body).to_include('thumbor_test_timer_sum 500')
