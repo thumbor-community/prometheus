@@ -5,6 +5,9 @@ This project adheres to [CHANGELOG](http://keepachangelog.com).
 
 ## [Unreleased]
 
+## [0.1.1] - 2916-03-17
+- fixed hard coded label mapping not matching with prefix 'thumbor_'
+
 ## [0.1.0] - 2017-02-23
 ### Added
 - initial metrics class

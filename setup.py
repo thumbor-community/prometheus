@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='tc_prometheus',
-    version="0.1.0",
+    version="0.1.1",
     description='Thumbor Prometheus metrics extension',
     author='Simon Effenberg',
     author_email='savar@schuldeigen.de',
