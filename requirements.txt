@@ -1,4 +1,4 @@
-thumbor==6.2.1
+thumbor>=6.2.1
 prometheus_client
 pyvows
 tornado_pyvows

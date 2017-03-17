@@ -55,6 +55,7 @@ class MetricsVows(TornadoHTTPContext):
             topic.metrics.incr('test.counter', 5)
             topic.metrics.timing('test.timer', 150)
             topic.metrics.timing('test.timer', 350)
+            topic.metrics.incr('response.status.200', 1)
 
             self.http_client.fetch('http://localhost:8000', self.stop)
             response = self.wait()
@@ -62,3 +63,4 @@ class MetricsVows(TornadoHTTPContext):
             expect(response.body).to_include('thumbor_test_counter 6')
             expect(response.body).to_include('thumbor_test_timer_count 2')
             expect(response.body).to_include('thumbor_test_timer_sum 500')
+            expect(response.body).to_include('thumbor_response_status{statuscode="200"} 1')

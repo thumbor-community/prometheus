@@ -67,7 +67,11 @@ class Metrics(BaseMetrics):
         # _ -> __
         # - -> __
         # . -> _
-        return basename.replace('_', '__').replace('-', '__').replace('.', '_')
+
+        # following prometheus advice to prefix names with the app name
+        return "thumbor_{0}".format(
+            basename.replace('_','__').replace('-','__').replace('.','_')
+        )
 
     def __labels(self, name, metricname):
         if name not in self.mapping:
@@ -88,4 +92,4 @@ class Metrics(BaseMetrics):
         for mapped in self.mapping.keys():
             if metricname.startswith(mapped + "."):
                 metricname = mapped
-        return "thumbor.{0}".format(metricname)
+        return metricname
