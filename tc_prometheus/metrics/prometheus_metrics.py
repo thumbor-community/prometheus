@@ -16,7 +16,10 @@ class Metrics(BaseMetrics):
         super().__init__(config)
 
         if not hasattr(Metrics, 'http_server_started'):
-            start_http_server(config.PROMETHEUS_SCRAPE_PORT)
+            port = config.PROMETHEUS_SCRAPE_PORT
+            if isinstance(port, str):
+                port = int(port)
+            start_http_server(port)
             Metrics.http_server_started = True
             Metrics.counters = {}
             Metrics.summaries = {}

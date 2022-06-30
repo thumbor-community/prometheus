@@ -21,12 +21,15 @@ class MetricsContext(TestCase):
     def setUp(self):
         self.config = Config()
         self.config.METRICS = 'tc_prometheus.metrics.prometheus_metrics'
-        self.config.PROMETHEUS_SCRAPE_PORT = 8001
+        self.config.PROMETHEUS_SCRAPE_PORT = '8001'
         
         self.importer = Importer(self.config)
         self.importer.import_modules()
         
         self.context = Context(None, self.config, self.importer)
+
+    def tearDown(self):
+        pass
 
 
 class CanCreateContextWithPrometheusMetrics(MetricsContext):
@@ -45,6 +48,7 @@ class PrometheusEndpoint(MetricsContext):
         self.http_client = HTTPClient()
         
     def tearDown(self):
+        super().tearDown()
         self.http_client.close()
     
     def test_should_present_metrics(self):
@@ -55,11 +59,11 @@ class PrometheusEndpoint(MetricsContext):
         self.context.metrics.incr('response.status.200', 1)
 
         response = self.http_client.fetch('http://localhost:8001')
-        
+
         expect(response.body).Not.to_be_null()
-        
+
         body = str(response.body)
-        
+
         expect(body).to_include('thumbor_test_counter_total 6')
         expect(body).to_include('thumbor_test_timer_count 2')
         expect(body).to_include('thumbor_test_timer_sum 500')
