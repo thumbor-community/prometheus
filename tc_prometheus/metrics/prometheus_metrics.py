@@ -13,7 +13,7 @@ from thumbor.metrics import BaseMetrics
 class Metrics(BaseMetrics):
 
     def __init__(self, config):
-        super(Metrics, self).__init__(config)
+        super().__init__(config)
 
         if not hasattr(Metrics, 'http_server_started'):
             start_http_server(config.PROMETHEUS_SCRAPE_PORT)

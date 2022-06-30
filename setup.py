@@ -2,6 +2,11 @@
 
 from setuptools import setup, find_packages
 
+INSTALL_REQUIRES = [
+    'thumbor==7.*,>=7.0.6',
+    'prometheus_client==0.*,>=0.14.1',
+]
+
 setup(
     name='tc_prometheus',
     version="0.1.1",
@@ -12,10 +17,15 @@ setup(
     zip_safe=False,
     include_package_data=True,
     packages=find_packages(),
-    install_requires=[
-        'thumbor',
-        'prometheus_client',
-    ],
+    install_requires=INSTALL_REQUIRES,
+    extras_require={
+        "all": INSTALL_REQUIRES,
+        "tests": INSTALL_REQUIRES + [
+            'preggy==1.*,>=1.4.4',
+            'pytest==7.*,>=7.0.0',
+            'pytest-cov==3.*,>=3.0.0',
+        ],
+    },
     license='MIT',
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -23,7 +33,7 @@ setup(
         'Natural Language :: English',
         'Operating System :: MacOS',
         'Operating System :: POSIX :: Linux',
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
     ],
     long_description="""
