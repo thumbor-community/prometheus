@@ -3,8 +3,7 @@
 
 # Licensed under the MIT license:
 # http://www.opensource.org/licenses/mit-license
-# Copyright (c) 2017 Simon Effenberg <savar@schuldeigen.de>
-# Copyright (c) 2017 Thumbor Community Extensions
+# Copyright (c) 2022 Thumbor Community Extensions
 
 from unittest import TestCase
 from preggy import expect
