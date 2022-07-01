@@ -9,7 +9,7 @@ INSTALL_REQUIRES = [
 
 setup(
     name='tc_prometheus',
-    version="0.1.1",
+    version="1.0.0",
     description='Thumbor Prometheus metrics extension',
     author='Simon Effenberg',
     author_email='savar@schuldeigen.de',
