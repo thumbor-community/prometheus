@@ -10,7 +10,7 @@ via an HTTP endpoint on a configurable port.
 pip install tc_prometheus
 
 # master branch
-pip install -e git://github.com/thumbor-community/prometheus.git@master#egg=tc_prometheus
+pip install -e git+https://github.com/thumbor-community/prometheus.git@master#egg=tc_prometheus
 ```
 
 ## Configuration
