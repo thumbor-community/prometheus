@@ -38,7 +38,7 @@ class Metrics(BaseMetrics):
         name, labels = self.__data(metricname)
 
         # Delete when issue https://github.com/thumbor/thumbor/pull/1462 is solved
-        name = name + "_total"
+        name = name + "_incr"
 
         if name not in Metrics.counters:
             Metrics.counters[name] = Counter(name, name, labels.keys())
