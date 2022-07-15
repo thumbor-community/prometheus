@@ -29,13 +29,16 @@ class Metrics(BaseMetrics):
                 'response.status': ['statuscode'],
                 'response.format': ['extension'],
                 'response.bytes': ['extension'],
-                'original_image.status': ['statuscode'],
-                'original_image.fetch': ['statuscode', 'networklocation'],
                 'response.time': ['statuscode_extension'],
+                'original_image.status': ['statuscode', 'networklocation'],
+                'original_image.fetch': ['statuscode', 'networklocation'],
         }
 
     def incr(self, metricname, value=1):
         name, labels = self.__data(metricname)
+
+        # Delete when issue https://github.com/thumbor/thumbor/pull/1462 is solved
+        name = name + "_total"
 
         if name not in Metrics.counters:
             Metrics.counters[name] = Counter(name, name, labels.keys())
@@ -87,7 +90,7 @@ class Metrics(BaseMetrics):
         values = metricname.replace(name + '.', '').split('.', len(self.mapping[name])-1)
         labels = {}
         for index, label in enumerate(self.mapping[name]):
-            labels[label] = values[index]
+            labels[label] = values[index] if index < len(values) else None
 
         return labels
 

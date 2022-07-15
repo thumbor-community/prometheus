@@ -5,6 +5,10 @@ This project adheres to [CHANGELOG](http://keepachangelog.com).
 
 ## [Unreleased]
 
+## [1.0.1] - 2022-07-15
+### Fixed
+- https://github.com/thumbor/thumbor/pull/1462
+
 ## [1.0.0] - 2022-07-01
 ### Changed
 - Python 3 and Thumbor 7 support
