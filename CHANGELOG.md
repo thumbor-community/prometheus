@@ -5,14 +5,11 @@ This project adheres to [CHANGELOG](http://keepachangelog.com).
 
 ## [Unreleased]
 
-## [1.0.1] - 2022-07-15
-### Fixed
-- https://github.com/thumbor/thumbor/pull/1462
-
-## [1.0.0] - 2022-07-01
+## [1.0.0] - 2022-07-27
 ### Changed
-- Python 3 and Thumbor 7 support
-- Removed pyvows in favor of pytest
+- Python 3 and Thumbor 7 support ([mbarouski](https://github.com/mbarouski))
+- Removed pyvows in favor of pytest ([mbarouski](https://github.com/mbarouski))
+- Fixed https://github.com/thumbor/thumbor/pull/1462 ([mbarouski](https://github.com/mbarouski))
 
 ## [0.1.1] - 2017-03-17
 ### Fixed
