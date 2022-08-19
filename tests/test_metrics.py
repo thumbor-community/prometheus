@@ -40,6 +40,10 @@ class CanCreateContextWithPrometheusMetrics(MetricsContext):
         expect(self.context.metrics.incr('test.count', 2)).not_to_be_an_error()
         expect(self.context.metrics.timing('test.time', 100)).not_to_be_an_error()
 
+    def test_should_not_fail_on_use_of_identical_names_for_incr_and_timing_metrics(self):
+        expect(self.context.metrics.incr('test')).not_to_be_an_error()
+        expect(self.context.metrics.timing('test', 100)).not_to_be_an_error()
+
 
 class PrometheusEndpoint(MetricsContext):
     def setUp(self):
@@ -56,6 +60,10 @@ class PrometheusEndpoint(MetricsContext):
         self.context.metrics.timing('test.timer', 150)
         self.context.metrics.timing('test.timer', 350)
         self.context.metrics.incr('response.status.200', 1)
+        # without networklocation label
+        self.context.metrics.incr("original_image.status.created")
+        # with networklocation label
+        self.context.metrics.incr("original_image.status.created.images.com")
 
         response = self.http_client.fetch('http://localhost:8001')
 
@@ -63,7 +71,7 @@ class PrometheusEndpoint(MetricsContext):
 
         body = str(response.body)
 
-        expect(body).to_include('thumbor_test_counter_total 6')
+        expect(body).to_include('thumbor_test_counter_incr_total 6')
         expect(body).to_include('thumbor_test_timer_count 2')
         expect(body).to_include('thumbor_test_timer_sum 500')
-        expect(body).to_include('thumbor_response_status_total{statuscode="200"} 1')
+        expect(body).to_include('thumbor_response_status_incr_total{statuscode="200"} 1')
