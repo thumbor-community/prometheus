@@ -4,7 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 This project adheres to [CHANGELOG](http://keepachangelog.com).
 
 ## [Unreleased]
-### Changed
+
+## [2.0.0] - 2022-08-19
+### Fixed
 - Fixed https://github.com/thumbor/thumbor/pull/1462 ([mbarouski](https://github.com/mbarouski))
 
 ## [1.0.0] - 2022-07-01
