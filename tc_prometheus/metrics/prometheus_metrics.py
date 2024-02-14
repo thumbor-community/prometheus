@@ -11,7 +11,7 @@ from prometheus_client.core import CollectorRegistry
 from thumbor.metrics import BaseMetrics
 import os
 
-os.environ["PROMETHEUS_MULTIPROC_DIR"] = "/tmp/"
+os.environ["PROMETHEUS_MULTIPROC_DIR"] = "/tmp"
 
 class Metrics(BaseMetrics):
 
