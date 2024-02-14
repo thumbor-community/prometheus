@@ -9,10 +9,7 @@
 from prometheus_client import Counter, start_http_server, Summary, multiprocess
 from prometheus_client.core import CollectorRegistry
 from thumbor.metrics import BaseMetrics
-import os
 
-os.environ["PROMETHEUS_MULTIPROC_DIR"] = '/tmp'
-print(os.environ.get("PROMETHEUS_MULTIPROC_DIR"))
 
 class Metrics(BaseMetrics):
 
