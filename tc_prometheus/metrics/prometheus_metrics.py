@@ -6,6 +6,8 @@
 # Copyright (c) 2017 Simon Effenberg <savar@schuldeigen.de>
 # Copyright (c) 2017 Thumbor Community Extensions
 
+from os import environ
+
 from prometheus_client import Counter, start_http_server, Summary, multiprocess
 from prometheus_client.core import CollectorRegistry
 from thumbor.metrics import BaseMetrics
