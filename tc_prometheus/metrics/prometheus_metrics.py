@@ -20,9 +20,12 @@ class Metrics(BaseMetrics):
             port = config.PROMETHEUS_SCRAPE_PORT
             if isinstance(port, str):
                 port = int(port)
-            registry = CollectorRegistry()
-            multiprocess.MultiProcessCollector(registry)
-            start_http_server(port, registry=registry)
+            if environ.get('PROMETHEUS_MULTIPROC_DIR') is not None:
+                registry = CollectorRegistry()
+                multiprocess.MultiProcessCollector(registry)
+                start_http_server(port, registry=registry)
+            else:
+                start_http_server(port)
             Metrics.http_server_started = True
             Metrics.counters = {}
             Metrics.summaries = {}
