@@ -22,8 +22,8 @@ setup(
         "all": INSTALL_REQUIRES,
         "tests": INSTALL_REQUIRES + [
             'preggy==1.*,>=1.4.4',
-            'pytest==7.*,>=7.0.0',
-            'pytest-cov==3.*,>=3.0.0',
+            'pytest==8.*,>=8.0.0',
+            'pytest-cov==5.*,>=5.0.0',
         ],
     },
     license='MIT',
