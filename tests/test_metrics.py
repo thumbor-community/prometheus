@@ -7,6 +7,7 @@
 
 from unittest import TestCase
 from preggy import expect
+import pytest
 
 from thumbor.context import Context
 from thumbor.importer import Importer
@@ -36,13 +37,18 @@ class CanCreateContextWithPrometheusMetrics(MetricsContext):
         expect(self.context.metrics).to_be_instance_of(tc_prometheus.metrics.prometheus_metrics.Metrics)
 
     def test_should_not_fail_on_use(self):
-        expect(self.context.metrics.incr('test.count')).not_to_be_an_error()
-        expect(self.context.metrics.incr('test.count', 2)).not_to_be_an_error()
-        expect(self.context.metrics.timing('test.time', 100)).not_to_be_an_error()
+        expect(self.context.metrics.incr('test.count')).Not.to_be_an_error()
+        expect(self.context.metrics.incr('test.count', 2)).Not.to_be_an_error()
+        expect(self.context.metrics.timing('test.time', 100)).Not.to_be_an_error()
 
-    def test_should_not_fail_on_use_of_identical_names_for_incr_and_timing_metrics(self):
-        expect(self.context.metrics.incr('test')).not_to_be_an_error()
-        expect(self.context.metrics.timing('test', 100)).not_to_be_an_error()
+    def test_should_fail_on_use_of_identical_names_for_incr_and_timing_metrics(self):
+        expect(self.context.metrics.incr('test')).Not.to_be_an_error()
+
+        with pytest.raises(ValueError):
+            # for some unknown reason, `preggy` seems to not catch the exception
+            # even though the documentation says so and therefore the wrapper with
+            # `pytest.raises` is being used
+            expect(self.context.metrics.timing('test', 100)).to_be_an_error()
 
 
 class PrometheusEndpoint(MetricsContext):
@@ -71,7 +77,7 @@ class PrometheusEndpoint(MetricsContext):
 
         body = str(response.body)
 
-        expect(body).to_include('thumbor_test_counter_incr_total 6')
+        expect(body).to_include('thumbor_test_counter_total 6')
         expect(body).to_include('thumbor_test_timer_count 2')
         expect(body).to_include('thumbor_test_timer_sum 500')
-        expect(body).to_include('thumbor_response_status_incr_total{statuscode="200"} 1')
+        expect(body).to_include('thumbor_response_status_total{statuscode="200"} 1')

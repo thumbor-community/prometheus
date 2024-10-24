@@ -45,9 +45,6 @@ class Metrics(BaseMetrics):
     def incr(self, metricname, value=1):
         name, labels = self.__data(metricname)
 
-        # Delete when issue https://github.com/thumbor/thumbor/pull/1462 is solved
-        name = name + "_incr"
-
         if name not in Metrics.counters:
             Metrics.counters[name] = Counter(name, name, labels.keys())
 
