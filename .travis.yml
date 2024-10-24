@@ -1,6 +1,9 @@
 language: python
 python:
   - '3.9'
+  - '3.10'
+  - '3.11'
+  - '3.12'
 cache:
   directories:
     - $HOME/.cache/pip
