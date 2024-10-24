@@ -6,7 +6,10 @@
 # Copyright (c) 2017 Simon Effenberg <savar@schuldeigen.de>
 # Copyright (c) 2017 Thumbor Community Extensions
 
-from prometheus_client import Counter, start_http_server, Summary
+from os import environ
+
+from prometheus_client import Counter, start_http_server, Summary, multiprocess
+from prometheus_client.core import CollectorRegistry
 from thumbor.metrics import BaseMetrics
 
 
@@ -19,7 +22,12 @@ class Metrics(BaseMetrics):
             port = config.PROMETHEUS_SCRAPE_PORT
             if isinstance(port, str):
                 port = int(port)
-            start_http_server(port)
+            if environ.get('PROMETHEUS_MULTIPROC_DIR') is not None:
+                registry = CollectorRegistry()
+                multiprocess.MultiProcessCollector(registry)
+                start_http_server(port, registry=registry)
+            else:
+                start_http_server(port)
             Metrics.http_server_started = True
             Metrics.counters = {}
             Metrics.summaries = {}
@@ -99,3 +107,4 @@ class Metrics(BaseMetrics):
             if metricname.startswith(mapped + "."):
                 metricname = mapped
         return metricname
+    
