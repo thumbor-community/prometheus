@@ -42,6 +42,14 @@ thumbor --processes `nproc` -c /path/to/thumbor.conf
 
 ## Upgrade notes
 
+### from 3.x to 4.x
+The metric with the name `original_image.fetch` was renamed to two different ones with the names
+`original_image.fetch.count` and `original_image.fetch.latency`.
+
+**This requires at least thumbor in version [7.7.5](https://github.com/thumbor/thumbor/releases/tag/7.7.5)
+
+**Please make sure to adjust all recording rules, alerting rules and dashboards which are relying on these metrics.**
+
 ### from 2.x to 3.x
 All metrics of type `counter` have had before an enforced postfix of `_incr` which is now gone. Therefore
 all metrics of type `counter` are renamed and will not match with previously recorded metrics anymore.
