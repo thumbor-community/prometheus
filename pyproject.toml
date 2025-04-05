@@ -4,12 +4,19 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tc_prometheus"
-version = "3.0.0"
-license = {text = "MIT"}
+version = "4.0.0"
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{name = "Simon Effenberg", email = "savar@schuldeigen.de"}]
-classifiers = ["Development Status :: 5 - Production/Stable", "Intended Audience :: Developers", "Natural Language :: English", "Operating System :: MacOS", "Operating System :: POSIX :: Linux", "Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: MacOS", "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3"
+]
 description = "Thumbor Prometheus metrics extension"
-readme = {text = "\nPrometheus metrics extension enables thumbor to expose a scrape endpoint prometheus can scrape from.\n", content-type = "text/plain"}
+readme = "README.md"
 dependencies = ["prometheus_client==0.*,>=0.14.1", "thumbor==7.*,>=7.7.5"]
 
 [project.optional-dependencies]
