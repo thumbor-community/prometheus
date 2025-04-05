@@ -39,7 +39,8 @@ class Metrics(BaseMetrics):
                 'response.bytes': ['extension'],
                 'response.time': ['statuscode_extension'],
                 'original_image.status': ['statuscode', 'networklocation'],
-                'original_image.fetch': ['statuscode', 'networklocation'],
+                'original_image.fetch.count': ['statuscode', 'networklocation'],
+                'original_image.fetch.latency': ['statuscode', 'networklocation'],
         }
 
     def incr(self, metricname, value=1):
